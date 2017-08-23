@@ -64,7 +64,7 @@ def getData(file_name):
     return dictionary
 #end
 if __name__ == "__main__":
-    x=getData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/PFP2Files/20170110_093852_034.pfp2")
+    x=getData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/PFP2Files/20170110_093852_034.pfp2")
     for key in vars(x):
         s= vars(x)[key]
         print(str(key) + ": "+ str(s))

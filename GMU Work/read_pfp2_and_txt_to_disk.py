@@ -46,6 +46,6 @@ def writeAllData(directory,file_to_write):
     f.close()
 #end
 #testing
-#x=allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/fakedata/Combination_of_pfp2_and_txt")#opeartion is about 1/10 second
-#writeAllData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/fakedata/Combination_of_pfp2_and_txt",
+#x=allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/fakedata/Combination_of_pfp2_and_txt")#opeartion is about 1/10 second
+#writeAllData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/fakedata/Combination_of_pfp2_and_txt",
 #"C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/tests/writehere.txt")#between 8 and 9 seconds

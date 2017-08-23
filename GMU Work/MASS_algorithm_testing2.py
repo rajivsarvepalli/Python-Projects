@@ -16,8 +16,8 @@ from MASS_algorithm import STAMP
 #    x = x/np.max(x[indices])
 #   return x
 if __name__=="__main__":
-    g = quick_txt_reader("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeA")[0:2]
-    f = quick_txt_reader("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeM")[0:2]
+    g = quick_txt_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeA")[0:2]
+    f = quick_txt_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeM")[0:2]
     #ind = np.argpartition(a, -4)[-5:] 5 largest values indices
     start_time = time.time()
     P,I = STAMP(g[0],500)

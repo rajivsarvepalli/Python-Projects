@@ -98,11 +98,11 @@ def test1():#this dataset prefers 98
     '''
     times=[]
     start_time = time.time()
-    a = allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeA")
-    b = allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeB")
-    c = allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeC")
-    d = allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeD")
-    m =allData("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/KMeans_training/ModeM")
+    a = allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeA")
+    b = allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeB")
+    c = allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeC")
+    d = allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeD")
+    m =allData("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KMeans_training/ModeM")
     times+=[time.time()-start_time]
     #optional: randomzing bases
     e = np.concatenate((a,b,c,d),axis=0)
@@ -134,11 +134,11 @@ def test1():#this dataset prefers 98
 def test2():#dataset with fewer files many features
     times=[]
     start_time = time.time()
-    s1 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State1")
-    s2 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State2")
-    s3 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State3")
-    s4 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State4")
-    sT = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/StateTamper")
+    s1 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State1")
+    s2 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State2")
+    s3 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State3")
+    s4 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State4")
+    sT = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/StateTamper")
     times+=[time.time()-start_time]
     l =[0]*780 #(780)
     c = np.concatenate((s1,s2,s3,s4),axis=0)
@@ -178,16 +178,16 @@ def test2():#dataset with fewer files many features
 def test3():#dataset with many files few features pfp1
     times =[]
     st = time.time()
-    v00 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0000Path0000Iter00")
-    v01 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0000Path0000Iter01")
-    v10 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0001Path0001Iter00")
-    v11 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0001Path0001Iter01")
-    v20 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0002Path0002Iter00")
-    v21 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0002Path0002Iter01")
-    v30 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0003Path0003Iter00")
-    v31 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0003Path0003Iter01")
-    v40 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0004Path0004Iter00")
-    v41 = alld("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0004Path0004Iter01")
+    v00 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter00")
+    v01 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter01")
+    v10 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0001Path0001Iter00")
+    v11 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0001Path0001Iter01")
+    v20 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0002Path0002Iter00")
+    v21 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0002Path0002Iter01")
+    v30 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0003Path0003Iter00")
+    v31 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0003Path0003Iter01")
+    v40 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0004Path0004Iter00")
+    v41 = alld("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0004Path0004Iter01")
     times+=[time.time()-st]
     st =time.time()
     pca = PCA(n_components=200)

@@ -64,7 +64,7 @@ class KMeans:
         plt.draw()
         plt.pause(1)
         plt.clf()
-#x = np.loadtxt("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/UCI_machine_learning_Data_Repository/wine_dataset.txt",delimiter=",")
+#x = np.loadtxt("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/UCI_machine_learning_Data_Repository/wine_dataset.txt",delimiter=",")
 x,y = make_blobs(n_samples=100,n_features=10,centers=3,cluster_std=10,center_box=(-50.0, 50.0))
 kmeans = KMeans(n_cluster=3,total_iter=10)
 kmeans.fit(PCA(n_components=2).fit_transform(x))

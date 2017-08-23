@@ -8,11 +8,11 @@ from IPython.display import HTML, Image
 import numpy as np
 from sklearn.decomposition import PCA
 fig, ax = plt.subplots()
-s1 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State1")
-s2 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State2")
-s3 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State3")
-s4 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State4")
-sT = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/StateTamper")
+s1 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State1")
+s2 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State2")
+s3 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State3")
+s4 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State4")
+sT = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/StateTamper")
 c = np.concatenate((s1,s2,s3,s4,sT),axis=0)
 np.random.shuffle(c)
 s1,s2,s3,s4,sT = np.vsplit(c,5)

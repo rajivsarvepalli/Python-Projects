@@ -7,16 +7,16 @@ from sklearn.cross_validation import train_test_split
 from quick_pfp1_file_reader import alldata
 times=[]
 start_time = time.time()
-v00 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0000Path0000Iter00")
-v01 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0000Path0000Iter01")
-v10 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0001Path0001Iter00")
-v11 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0001Path0001Iter01")
-v20 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0002Path0002Iter00")
-v21 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0002Path0002Iter01")
-v30 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0003Path0003Iter00")
-v31 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0003Path0003Iter01")
-v40 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0004Path0004Iter00")
-v41 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet3/Vector0004Path0004Iter01")
+v00 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter00")
+v01 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter01")
+v10 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0001Path0001Iter00")
+v11 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0001Path0001Iter01")
+v20 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0002Path0002Iter00")
+v21 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0002Path0002Iter01")
+v30 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0003Path0003Iter00")
+v31 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0003Path0003Iter01")
+v40 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0004Path0004Iter00")
+v41 = alldata("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0004Path0004Iter01")
 times+=[time.time()-start_time]
 d = np.concatenate((v00,v01,v10,v11,v20,v21,v30,v31),axis=0)  #ratio 3 folders to one
 np.random.shuffle(d)

@@ -20,7 +20,7 @@ def read(file_to_read):
     return n
 f = open("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/tests/writehere.txt","w")
 f.close()
-reduced_data = PCA(n_components=2).fit_transform(read("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/UCI_machine_learning_Data_Repository/Iris dataset.txt"))
+reduced_data = PCA(n_components=2).fit_transform(read("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/UCI_machine_learning_Data_Repository/Iris dataset.txt"))
 print(reduced_data[58])
 kmeans = KMeans(init='k-means++', n_clusters=3, n_init=10)
 kmeans.fit(reduced_data)

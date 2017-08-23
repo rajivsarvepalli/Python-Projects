@@ -206,11 +206,11 @@ def roc_curve(fpr,tpr,file_path):
     plt.savefig(file_path)
 if __name__ =="__main__":
     from sklearn.metrics import accuracy_score
-    s1,l1 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State1",0)
-    s2,l2 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State2",0)
-    s3,l3 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State3",0)
-    s4,l4 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/State4",0)
-    sT,lT = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Python-Projects/GMU Work/AllData/dataSet2/StateTamper",1)
+    s1,l1 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State1",0)
+    s2,l2 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State2",0)
+    s3,l3 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State3",0)
+    s4,l4 = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State4",0)
+    sT,lT = load_pfp("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/StateTamper",1)
     l =np.concatenate((l1,l2,l3,l4))
     pca = PCA((s1,s2,s3,s4,sT),n_comp=195)
     sT = pca[780:len(pca)]
