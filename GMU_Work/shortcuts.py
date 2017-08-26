@@ -174,7 +174,7 @@ def simple_line_graph_with_points(x,y,color='black',annotated_values=(False,1),l
         plt.ylim(ylim)
     if annotated_values[0]:
         for i in range(0,len(y),annotated_values[1]):
-            ax.annotate(str(y[i]),xy=(x[i],y[i]),textcoords='offset points')
+            ax.annotate(str(y[i]),xy=(x[i],y[i]))
     if plt_show:
         plt.show()
 def plot_calibration_curve(x_train,y_train,x_test,y_test,classifier_object,classifier_name,figure_index,plt_show=False):
@@ -187,8 +187,15 @@ def plot_calibration_curve(x_train,y_train,x_test,y_test,classifier_object,class
     
     from useful_classifier_graphs import plot_calibration_curve
     plot_calibration_curve(x_train,y_train,x_test,y_test,classifier_object,classifier_name,figure_index,plt_show=plt_show)
-
-
+def time_function(f,*args):
+    '''
+    input: a function f, and arguments args
+    output: returns a time
+    '''
+    import time
+    start_time = time.perf_counter()
+    f(*args)
+    return time.perf_counter-start_time
 if __name__ =="__main__":
     from sklearn import datasets
     from sklearn.svm import SVC
