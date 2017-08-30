@@ -1,4 +1,6 @@
 import numpy as np
+import sys
+sys.path.append("C:\\Users\\Rajiv Sarvepalli\\Projects\\Python-Projects\\gmuwork")
 def bar_stack_grapher(values,bar_labels,colors,barwidth=1,legend_values=None,x_label=None,y_label=None,title=None,x_lim=None,y_lim=None,plt_show=True):#modify latetr make eay interface
     '''
     input: values in a array that follow the format that each bar is one row\n
@@ -29,21 +31,21 @@ def quick_pfp1_file_reader(directory):
     input: folder containging pfp1 files
     output: matrix of all their data
     '''
-    from quick_pfp1_file_reader import alldata
+    from file_reader_and_open_files.quick_pfp1_file_reader import alldata
     return alldata(directory)
 def quick_pfp2_file_reader(directory):
     '''
     input: folder containging pfp2 files
     output: matrix of all their data (1 row per file, 1 column per feature of that file)
     '''
-    from quick_pfp2_file_reader import alldata
+    from file_reader_and_open_files.quick_pfp2_file_reader import alldata
     return alldata(directory)
 def quick_txt_reader(directory):
     '''
     input: folder containging txt files
     output: matrix of all their data
     '''
-    from quick_txt_reader import allData
+    from file_reader_and_open_files.quick_txt_reader import allData
     return allData(directory)
 def extract_meta_and_data_file(directory):
     '''
@@ -51,7 +53,7 @@ def extract_meta_and_data_file(directory):
     these objects contain 4 variables for each of the main namespaces, and each of these variables may 
     conatin dictionaries, or sometimes lists of dictionaries
     '''
-    from extract_data import allData
+    from file_reader_and_open_files.extract_data import allData
     return allData(directory)
 def txt_fileCreator(location,startName,size,numberOfFiles):
     '''
@@ -61,7 +63,7 @@ def txt_fileCreator(location,startName,size,numberOfFiles):
     that is required
     Thsi example creates 100 files each conating 0 through 2000 all separtaed by tabs
     '''
-    from txt_fileCreator import create_multiple
+    from file_reader_and_open_files.txt_fileCreator import create_multiple
     from time import sleep
     print("Starting in 10 seconds")
     sleep(10)
@@ -73,7 +75,7 @@ def findfile(name,path,all=False):
     if all is false it it will return the first match in the path
     output: path to file
     '''
-    import findFile
+    import file_reader_and_open_files.findFile
     if all:
         return findFile.find_all(name,path)
     else:
@@ -196,6 +198,17 @@ def time_function(f,*args):
     start_time = time.perf_counter()
     f(*args)
     return time.perf_counter-start_time
+def STAMP(time_seriesA,m,time_seriesB):
+    '''
+    Runtime: O(n^2logn)
+    input: a time_seriesA and a subLen for the sliding windows,\n
+    a time_seriesB to compare time_seriesA, \n
+    or None to self-join time_SeriesA to compare it to itself
+    output: the matrix profile,followed by the integere pointers\n
+    these pointers allow you to find nearest neighbor in O(n) time
+    '''
+    from stamp.STAMP import STAMP as stmp
+    return stmp(time_seriesA,m,time_seriesB)
 if __name__ =="__main__":
     from sklearn import datasets
     from sklearn.svm import SVC

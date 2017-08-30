@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from MASS_algorithm_development import STAMP
-from shortcuts import quick_pfp2_file_reader
-from shortcuts import quick_pfp1_file_reader
-from shortcuts import simple_line_graph_with_points
+from gmuwork.shortcuts import quick_pfp2_file_reader
+from gmuwork.shortcuts import quick_pfp1_file_reader
+from gmuwork.shortcuts import simple_line_graph_with_points
 # def zeroOneNorm(x):
 #    x= np.array(x)
 #    y=np.logical_and(np.logical_not(np.isnan(x)),np.logical_not(np.isinf(x)))
