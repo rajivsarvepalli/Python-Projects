@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from shortcuts import quick_txt_reader
+from gmuwork.shortcuts import quick_txt_reader
 from scipy.spatial import distance
 import time
-from shortcuts import quick_txt_reader
+from gmuwork.shortcuts import quick_txt_reader
 from MASS_algorithm_development import STAMP
 from multiprocessing import Pool,freeze_support
 from itertools import repeat
@@ -16,7 +16,7 @@ def fft_time(X):
     print(time.time()-start)
 if __name__=="__main__":
     import scipy.io as sio
-    from shortcuts import quick_txt_reader
+    from gmuwork.shortcuts import quick_txt_reader
     matfile = sio.loadmat("C:/Users/Rajiv Sarvepalli/Downloads/testData.mat")
     data = matfile['data'][0]
     # for x in range(0,142):

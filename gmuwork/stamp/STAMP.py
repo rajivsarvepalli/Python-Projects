@@ -67,7 +67,7 @@ if __name__ =="__main__":
     #testing
     import time
     import scipy.io as sio
-    from shortcuts import quick_txt_reader
+    from gmuwork.shortcuts import quick_txt_reader
     matfile = sio.loadmat("C:/Users/Rajiv Sarvepalli/Downloads/testData.mat")
     data = matfile['data'][0]
     # for x in range(0,142):

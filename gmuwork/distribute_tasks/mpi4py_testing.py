@@ -40,8 +40,6 @@ m = quick_txt_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/KM
 d = np.concatenate((a,b,c,d,m))
 print("starting...stamp")
 start_time = time.time()
-r = scatter(STAMP,[d[0:8],256,None])
-print(time.time()-start_time)
-print(r)
-print(len(r))
-print(len(r[0]))
+r = scatter(STAMP,[d,256,None])
+if r != None:
+    np.save("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/Matrix_Profile_of_dataset1.npy",r)
