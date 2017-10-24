@@ -33,6 +33,7 @@ if __name__=="__main__":
     print('loc: ',np.argmax(AtoM))
     testDataStamp = np.load("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/testDataStamp.npy")
     testdataMAtrixprolfile = testDataStamp[0]
+    print(len(testdataMAtrixprolfile))
     times = [x for x in range(0,len(data))]
     plt.figure(figsize=(30,5))
     plt.plot(times,data,c='r')

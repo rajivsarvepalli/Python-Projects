@@ -51,7 +51,7 @@ def extract_meta_and_data_file(directory):
     '''
     Takes a folder returns all the contents of the meta and data files as list of data_metadata objects;
     these objects contain 4 variables for each of the main namespaces, and each of these variables may 
-    conatin dictionaries, or sometimes lists of dictionaries
+    contain dictionaries, or sometimes lists of dictionaries
     '''
     from file_reader_and_open_files.extract_data import allData
     return allData(directory)
@@ -209,6 +209,8 @@ def STAMP(time_seriesA,m,time_seriesB):
     '''
     from stamp.STAMP import STAMP as stmp
     return stmp(time_seriesA,m,time_seriesB)
+def mpi4py_distrubute_function(func,a):
+    pass
 if __name__ =="__main__":
     from sklearn import datasets
     from sklearn.svm import SVC

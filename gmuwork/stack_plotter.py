@@ -11,7 +11,6 @@ def bar_stack_grapher(values,bar_labels,colors,barwidth=1,legend_values=None,x_l
     plt_show determines whether the plot is hown at the end
     output: a stacked bar graph plotted in matplotlib 
     '''
-    
     import matplotlib.pyplot as plt
     import numpy as np
     values= np.array(values)

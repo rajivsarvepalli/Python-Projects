@@ -2,22 +2,16 @@ import os
 import numpy as np
 import json
 import warnings
-import time
 class data_and_metadata:
     def __init__(self,glob,capture,annotations,source,data):
+        '''
+        process data files and metadata with dictonaries
+        hold data and metadata files in an object of this class
+        '''
         self.core_global = glob
         self.core_capture =capture
         self.core_annotations = annotations
         self.PFP_source = source
-        # for key, value in dictionary.items():  #automtic creation of every instance
-        #     setattr(self, key, value)
-        #     if isinstance(value,dict):
-        #         for k,v in value.items():
-        #             setattr(self, k, v)
-        #     elif isinstance(value,list):
-        #         for x in value:
-        #             for k,v in x.items():
-        #                 setattr(self, k, v)
         self.data = data
 def extract_data(file_name,dt):
     data = np.fromfile(file_name,dtype=dt)
@@ -25,9 +19,11 @@ def extract_data(file_name,dt):
 def extract_metadata(file_name):
     f = open(file_name,"r")
     return json.load(f)
-def allData(directory_name):
-    '''Takes a folder returns all the contents of the meta and data files as list of data_metadata objects;
-    these objects contain 4 variables for each of the main namespaces, and each of these variables may 
+def SIGMF_extracter(directory_name):
+    '''
+    Follows SIGMF formatting: using metadata files to process corresponding data files 
+    Takes a folder returns all the contents of the meta and data files as list of data_metadata objects;
+    these objects contain 4 variables for each of the main namespaces defined by the json file, and each of these variables may 
     conatin dictionaries, or sometimes lists of dictionaries
     '''
     directory = os.fsencode(directory_name)
@@ -60,14 +56,16 @@ def allData(directory_name):
         warnings.warn("There were " + str(len(data_files)) + " unused data files due to not having a matching metadata file")
     return list_of_obj
 def datatype(st):
-    strin =""
-    rc = ""
+    '''
+    find correct datatype based off sigmf formatting
+    '''
+    strin =""   #marker for little or big endian
     if st.endswith("_le"):
         strin+="little"
     else:
         strin+="big"
     i = st.index("_")
-    fiu = None
+    fiu = None    #data type(int,float,complex,etc)
     size = int(st[2:i])
     if st[0]=='r':
         if st[1] == 'f':
@@ -100,12 +98,9 @@ def datatype(st):
     return np.dtype([(strin,fiu)])
         
 if __name__ == "__main__":
+    #testing
+    import time
     st =time.time()
-    x =allData(r"C:\Users\Rajiv Sarvepalli\Projects\Python-Projects\GMU Work\AllData\SIGMF_format_data\Picos3406D")
+    x =SIGMF_extracter(r"C:\Users\Rajiv Sarvepalli\Projects\Data for GMU\AllData\SIGMF_format_data\Picos3406D")
     print(time.time()-st)
-    # for i in range(0,len(x)):
-    #     for key in vars(x[i]):
-    #         s= vars(x[i])[key]
-    #         print(str(key) + ": "+ str(s))
-    #         print("\n")
     print("Done")

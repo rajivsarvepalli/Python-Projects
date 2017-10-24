@@ -87,7 +87,7 @@ def STAMP(time_seriesA,m,time_seriesB):
 def profile():
     import scipy.io as sio
     from STAMP import STAMP as stmp
-    from shortcuts import quick_pfp2_file_reader
+    from gmuwork.shortcuts import quick_pfp2_file_reader
     from pycallgraph import PyCallGraph
     from pycallgraph.output import GraphvizOutput
     from daniels_algorithm import test2
@@ -100,12 +100,12 @@ if __name__ =="__main__":
     #testing
     import time
     import scipy.io as sio
-    from shortcuts import quick_txt_reader
+    from gmuwork.shortcuts import quick_txt_reader
     #profile()
     matfile = sio.loadmat("C:/Users/Rajiv Sarvepalli/Downloads/testData.mat")
     data = matfile['data'][0]
     start_time =time.time()
-    findNN(data,data[0:200])
+    findNN(data,data[0:512])
     print('TIME1: ',time.time()-start_time)
     # for x in range(0,142):
     #     data+=[2,2,2,2,2,5,5,5,5,5,6,6,6,6,6,6,8,8,8,8,8,9,9,9,9,9,8,8,8,8,8,6,6,6,6,6,5,5,5,5,5,2,2,2,2,2]
