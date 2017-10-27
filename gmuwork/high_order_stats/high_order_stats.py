@@ -4,9 +4,9 @@ from scipy import stats
 from sklearn import metrics
 def onerowstats(x,n):
     return np.array([np.mean(x),np.median(x),stats.skew(x),stats.kurtosis(x),np.std(x),sumofmaxs_or_mins(x,10),sumofmaxs_or_mins(x,10,max_or_min="min"),RMS(x),interquartile_range(x),*lstats(x,n)])
-def matrix_stats(X,n=4):
+def matrix_stats(X,n=6):
     '''
-    Order of stats: standard dev, skewness, kurtosis, l-scale, l-skewness,lkurtosis
+    Order of stats: mean, median, skewness, kurtosis, standard dev,sumofmax,sumofmin,RMS,interquartile_range, l-scale, l-skewness,lkurtosis
     ^that is if n=4, if not 4 the order will be the same but additonal L-moments will added to the end, 1 per each value of n that increases
     Input: Matrix of rows of data 
     Output: 'summary' of each in row vectors joined into a matrix,
@@ -64,16 +64,26 @@ def lstats(x,n):
     '''
     lratios = lm.lmom_ratios(x,nmom=n)
     return lratios[1:n]
+def profile(data):
+    from pycallgraph import PyCallGraph
+    from pycallgraph.output import GraphvizOutput
+    data = data
+    graphviz = GraphvizOutput(output_file='C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/profile_STATS.png')
+    with PyCallGraph(output=graphviz):
+        matrix_stats(data)
 if __name__ =="__main__":
     #testing 
     import time
+    from numpy.fft import fft
     from gmuwork.shortcuts import quick_pfp2_file_reader
-    s1 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State1")
-    s2 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State2")
-    s3 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State3")
-    s4 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State4")
-    sT = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/StateTamper")
+    s1 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State1")[0:25]
+    s2 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State2")[0:25]
+    s3 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State3")[0:25]
+    s4 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/State4")[0:25]
+    sT = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet2/StateTamper")[0:100]
     d = np.concatenate((s1,s2,s3,s4,sT),axis=0)
+    d = fft(d)
     start_time = time.time()
     y = matrix_stats(d)
     print(time.time()-start_time)
+    np.save("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_with_fft.npy",y)

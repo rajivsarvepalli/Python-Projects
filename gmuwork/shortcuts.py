@@ -209,6 +209,33 @@ def STAMP(time_seriesA,m,time_seriesB):
     '''
     from stamp.STAMP import STAMP as stmp
     return stmp(time_seriesA,m,time_seriesB)
+def numpyarr_to_arff_format_in_string(X,relation,attributes):
+    '''
+    input: Takes 2D arraylike X (should be training set and have labels at the end of each data line),
+    relation as a string, atrributes in the list attributes (datatype is included, and so is class, at the end of the list )
+    output: converts array into arrf format in a string so it can be written to arff file
+    '''
+    s = ""
+    s += "@RELATION " + relation + "\n\n"
+    classinA = attributes[len(attributes)-1]
+    attributes = attributes[1:len(attributes)-1]
+    for x in attributes:
+        s+= "@ATTRIBUTE " + x + "\n"
+    s+= "@ATTRIBUTE class        {"
+    for i in range(len(classinA)-1):
+        s += classinA[i] + ","
+    s += classinA[len(classinA)-1] + "}\n\n@DATA\n"
+    a = ""
+    for x in X:
+        z =-1
+        for i in range(len(x)):
+            if len(x)-1 != i:
+                a += str(x[i]) + ","
+            else:
+                z = x[i]
+        a+= classinA[int(z)]
+        a+="\n"
+    return s + a
 def mpi4py_distrubute_function(func,a):
     pass
 if __name__ =="__main__":
