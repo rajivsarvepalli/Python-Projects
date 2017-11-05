@@ -215,10 +215,12 @@ def numpyarr_to_arff_format_in_string(X,relation,attributes):
     relation as a string, atrributes in the list attributes (datatype is included, and so is class, at the end of the list )
     output: converts array into arrf format in a string so it can be written to arff file
     '''
+    X = np.real(X)
+    X = np.nan_to_num(X)
     s = ""
     s += "@RELATION " + relation + "\n\n"
     classinA = attributes[len(attributes)-1]
-    attributes = attributes[1:len(attributes)-1]
+    attributes = attributes[0:len(attributes)-1]
     for x in attributes:
         s+= "@ATTRIBUTE " + x + "\n"
     s+= "@ATTRIBUTE class        {"
