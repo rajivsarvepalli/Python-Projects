@@ -82,7 +82,9 @@ if __name__ =="__main__":
     s4 = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0003Path0003Iter00")[0:25]
     sT = quick_pfp2_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0004Path0004Iter01")[0:100]
     d = np.concatenate((s1,s2,s3,s4,sT),axis=0)
+    d = d.astype(np.float64)
+    d = np.fft.rfft(d)
     start_time = time.time()
     y = matrix_stats(d)
     print(time.time()-start_time)
-    np.save("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset.npy",y)
+    np.save("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset_With_fft.npy",y)

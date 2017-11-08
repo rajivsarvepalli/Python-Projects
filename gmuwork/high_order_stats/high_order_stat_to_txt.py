@@ -21,14 +21,14 @@ def load_then_to_txt(loc_of_np,loc_to_write):
 if __name__=="__main__":
     # load_then_to_txt("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_with_fft.npy","C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/high_order_stats_txt_with_fft.arff")
     from gmuwork.shortcuts import numpyarr_to_arff_format_in_string
-    X = np.load("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset.npy")
+    X = np.load("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset_with_fft.npy")
     l = [0]*100+[1]*100
     l = np.vstack(l)
     X = np.hstack((X,l))
     s = numpyarr_to_arff_format_in_string(X,"stats",['mean  NUMERIC', 'median  NUMERIC', 'skewness  NUMERIC', 'kurtosis  NUMERIC', 
     'standard_dev  NUMERIC','sumofmax  NUMERIC','sumofmin  NUMERIC','RMS  NUMERIC','interquartile_range  NUMERIC', 
     'l-scale  NUMERIC', 'l-skewness  NUMERIC','lkurtosis  NUMERIC','L4  NUMERIC','L5  NUMERIC',['normal','malware-infected']])
-    f = open("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset.arff","w")
+    f = open("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/matrix_stats_vector_dataset_with_fft.arff","w")
     f.write(s)
     f.close()
     print("Done")
