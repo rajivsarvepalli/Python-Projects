@@ -11,7 +11,7 @@ def bar_stack_grapher(values,bar_labels,colors,barwidth=1,legend_values=None,x_l
     x_label,y_label are labels for x, and y axis\n
     title is title of the plot\n
     x_lim,y_lim are limits of x-axis and y-axis\n
-    plt_show determines whether the plot is hown at the end
+    plt_show determines whether the plot is shown at the end
     output: a stacked bar graph plotted in matplotlib 
     '''
     from stack_plotter import bar_stack_grapher as bsg
@@ -197,7 +197,7 @@ def time_function(f,*args):
     import time
     start_time = time.perf_counter()
     f(*args)
-    return time.perf_counter-start_time
+    return time.perf_counter()-start_time
 def STAMP(time_seriesA,m,time_seriesB):
     '''
     Runtime: O(n^2logn)
@@ -238,8 +238,128 @@ def numpyarr_to_arff_format_in_string(X,relation,attributes):
         a+= classinA[int(z)]
         a+="\n"
     return s + a
+def using_hmms_to_compute_summed_distances(trainData, testData, n_values_to_sum=5):
+    '''
+    input: trainData, testData and the number of values to sum (n-nearest neighbors)
+    output: the n nearest output values summed of each (len(array_of_summed_values) = len(testData))
+    data vector in the dataset(dataset is both trainData and testData)\n
+    given some normality, compute_hmm_values can compare that to testData\n and see its relative distance to the normality
+    '''
+    from hmm.compute_hmm_values import compute_hmm_values as chv
+    return chv(trainData,testData,n_values_to_sum=n_values_to_sum)
 def mpi4py_distrubute_function(func,a):
     pass
+def ADASYN(X,y,ratio=0.5,imb_threshold=.5,k=5,random_state=None,verbose = True):
+    """
+    Returns synthetic minority samples.
+    Parameters
+    ----------
+    X : array-like, shape = [n__samples, n_features]
+        Holds the minority and majority samples
+    y : array-like, shape = [n__samples]
+        Holds the class targets for samples
+    ratio : Growth percentage with respect to initial minority
+        class size. For example if ratio=0.65 then after
+        resampling minority class(es) will have 1.65 times
+        its initial size
+    imb_threshold : The imbalance ratio threshold to allow/deny oversampling.
+        For example if imb_threshold=0.5 then minority class needs
+        to be at most half the size of the majority in order for
+        resampling to apply
+    k : Number of K-nearest-neighbors
+    random_state : seed for random number generation
+    verbose : Determines if messages will be printed to terminal or not
+    Returns
+    -------
+    new_X : new dataset with synthetic samples at the front 
+    new_Y : new labels for the new dataset
+    Returns x and y in form of x, y
+    """
+    from resampling_data_techniques import ADASYN
+    ada = ADASYN.ADASYN(ratio=ratio,imb_threshold=imb_threshold, k=k,random_state=random_state,verbose=verbose)
+    return ada.fit_transform(X,y)    
+def borderlineSMOTE(X, y, minority_target, N, k):
+    """
+    Returns synthetic minority samples.
+    Parameters
+    ----------
+    X : array-like, shape = [n__samples, n_features]
+        Holds the minority and majority samples
+    y : array-like, shape = [n__samples]
+        Holds the class targets for samples
+    minority_target : value for minority class
+    N : percetange of new synthetic samples -  
+        n_synthetic_samples = N/100 * n_minority_samples. Can be < 100.
+    k : int. Number of nearest neighbours. 
+    h : high in random.uniform to scale dif of snythetic sample
+    Returns
+    -------
+    new_X : new dataset with synthetic samples at the beginning of array
+    new_Y : new labels to go with new dataset\n
+    Returns x and y in form of x, y
+    Note
+    -------
+    only returns varitations of dangerous minoirty class options - hardest for clasifier to get
+    """
+    from resampling_data_techniques import SMOTE
+    return SMOTE.borderlineSMOTE(X,y,minority_target,N,k)
+def simple_random_undersampling(X,y,ratio=.5):
+    '''
+    Returns new dataset and labels with random data vectors of the majority class removed
+    Parameters
+    ----------
+    X : arraylike dataset
+    y : arraylike labels for dataset
+    ratio : number of minority class to number of majority class
+    Returns
+    ----------
+    X : new dataset with random portions of majority data vectors
+        removed from old dataset
+    y : new labels for new dataset 
+    Returns x and y in form of x, y
+    '''
+    from resampling_data_techniques import simple_random_oversampling
+    return simple_random_oversampling.random_undersampling(X,y,ratio=ratio)
+
+def simple_random_oversampling(X,y,ratio=.5):
+    '''
+    Returns new dataset and labels with random data vectors of the minority class added
+    Parameters
+    ----------
+    X : arraylike dataset
+    y : arraylike labels for dataset
+    ratio : number of minoirty class to number of majority class
+    Returns
+    ----------
+    X : new dataset with random portions of minority data vectors added to old dataset
+    y : new labels for new dataset 
+    Returns x and y in form of x, y
+    '''
+    from resampling_data_techniques import simple_random_oversampling
+    return simple_random_oversampling.random_oversampling(X,y,ratio=ratio)
+def cluster_based_over_under_sampling(X,y,n_majority=4,n_minority=2,ratio=0.5):
+    '''
+    Returns new dataset and labels with clustered data vectors of 
+    the minority class added and clustered data vectors of 
+    the majority class removed, creating a new dataset 
+    with relatively same length as original
+    Parameters
+    ----------
+    X : arraylike dataset
+    y : arraylike labels for dataset
+    n_majority : number of majority clusters
+    n_minority : number of minority clusters
+    ratio : number of minority class to number of majority class
+    Returns
+    ----------
+    X : new dataset of nearly the same length as original X
+    y : new labels for the new dataset\n
+    Returns x and y in form of x, y
+    
+    '''
+    from resampling_data_techniques import cluster_based_oversampling
+    return cluster_based_oversampling.cluster_based_oversampling(X,y,n_majority,n_minority,ratio=ratio)
+
 if __name__ =="__main__":
     from sklearn import datasets
     from sklearn.svm import SVC

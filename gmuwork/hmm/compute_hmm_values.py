@@ -8,7 +8,6 @@ def prepare_hmms(traindata,testData):
     '''
     testhmm_matrix =[]
     trainhmm_matrix = []
-    print(len(traindata))
     for i in range(0,len(traindata)):
         model = hmm.GaussianHMM(n_components=1)
         model.fit(traindata[i].reshape(-1,1))
@@ -17,7 +16,7 @@ def prepare_hmms(traindata,testData):
         model = hmm.GaussianHMM(n_components=1)
         model.fit(testData[i].reshape(-1,1))
         testhmm_matrix.append(model)
-    return np.array(trainhmm_matrix),np.array(testhmm_matrix)
+    return np.array(trainhmm_matrix), np.array(testhmm_matrix)
 def compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData):
     '''
     For each test hidden markov model compare to each train markov model using formula:\n
@@ -43,8 +42,9 @@ def compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData):
 def compute_hmm_values(trainData,testData,n_values_to_sum=5):
     '''
     input: trainData, testData and the number of values to sum (n-nearest neighbors)
-    output: the n nearest output values summed of each 
-    data vector in the dataset(dataset is both trainData and testData)
+    output: the n nearest output values summed of each (len(array_of_summed_values) = len(testData))
+    data vector in the dataset(dataset is both trainData and testData)\n
+    given some normality, compute_hmm_values can compare that to testData\n and see its relative distance to the normality
     '''
     trainhmm_matrix, testhmm_matrix = prepare_hmms(trainData,testData)
     result =compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData)
@@ -59,6 +59,8 @@ if __name__ =="__main__":
     #testing
     from gmuwork.shortcuts import quick_pfp1_file_reader
     from sklearn.model_selection import train_test_split
+    from sklearn.naive_bayes import GaussianNB
+    from sklearn.metrics import accuracy_score
     v00 = quick_pfp1_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter00")[0:20]
     v01 = quick_pfp1_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0000Path0000Iter01")[0:20]
     v10 = quick_pfp1_file_reader("C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/AllData/dataSet3/Vector0001Path0001Iter00")[0:20]
@@ -75,6 +77,13 @@ if __name__ =="__main__":
     data_train, data_test, labels_train, labels_test = train_test_split(testData,l,train_size =0,random_state=4)
     result2 = compute_hmm_values(trainData,data_test)
     print(result2)
-    print(np.mean(result2))
-    print(len(result2))
     print(labels_test)
+    naiveb_test_data = result2[len(result2)-20:len(result2)]
+    naiveb_train_data = result2[0:len(result2)-20]
+    naiveb_test_data_labels = labels_test[len(labels_test)-20:len(labels_test)]
+    naiveb_train_data_labels = labels_test[0:len(labels_test)-20]
+    nb = GaussianNB()
+    nb.fit(naiveb_train_data,naiveb_train_data_labels)
+    pred = nb.predict(naiveb_test_data)
+    print(accuracy_score(pred,naiveb_test_data_labels))
+
