@@ -14,7 +14,7 @@ def bar_stack_grapher(values,bar_labels,colors,barwidth=1,legend_values=None,x_l
     plt_show determines whether the plot is shown at the end
     output: a stacked bar graph plotted in matplotlib 
     '''
-    from stack_plotter import bar_stack_grapher as bsg
+    from graphs_and_visuals.stack_plotter import bar_stack_grapher as bsg
     bsg(values,bar_labels,colors,barwidth=barwidth,legend_values=legend_values,x_label=x_label,y_label=y_label,title=title,x_lim=x_lim,y_lim=y_lim,plt_show=plt_show)
 def memory_usage_psutil():
     '''
@@ -93,7 +93,7 @@ def confusion_matrix_plotter(y_true,y_pred,classes,normalize=False,title='Confus
     and displays the plain confusion matrix in printed out format as well\n
     The color is darkest where the most values, and lightest where there are the least
     '''
-    from useful_classifier_graphs import confusion_matrix_plotter as cmpl
+    from graphs_and_visuals.useful_classifier_graphs import confusion_matrix_plotter as cmpl
     cmpl(y_true,y_pred,classes,normalize=normalize,title=title,plt_show=plt_show)
 def validation_curve(classifier,X,y,param_name,param_range,plt_show=True):
     '''
@@ -104,7 +104,7 @@ def validation_curve(classifier,X,y,param_name,param_range,plt_show=True):
     plt_show determines whthere the plot is shown at the end\n
     output: a graph of the validation curve (higher score is better)
     '''
-    from useful_classifier_graphs import validation_curve
+    from graphs_and_visuals.useful_classifier_graphs import validation_curve
     validation_curve(classifier,X,y,param_name,param_range,plt_show=plt_show)
 def learning_curve(classifier,X,y,cv=None,n_jobs=1, train_sizes=np.linspace(.1, 1.0, 5),plt_show=True):
     """
@@ -144,7 +144,7 @@ def learning_curve(classifier,X,y,cv=None,n_jobs=1, train_sizes=np.linspace(.1, 
     n_jobs : integer, optional
         Number of jobs to run in parallel (default 1).
     """
-    from useful_classifier_graphs import learning_curve
+    from graphs_and_visuals.useful_classifier_graphs import learning_curve
     learning_curve(classifier,X,y,cv=cv,n_jobs=n_jobs, train_sizes=train_sizes,plt_show=plt_show)
     '''@inproceedings{sklearn_api,
     author    = {Lars Buitinck and Gilles Louppe and Mathieu Blondel and
@@ -187,7 +187,7 @@ def plot_calibration_curve(x_train,y_train,x_test,y_test,classifier_object,class
     outputs a graph, and printed values
     '''
     
-    from useful_classifier_graphs import plot_calibration_curve
+    from graphs_and_visuals.useful_classifier_graphs import plot_calibration_curve
     plot_calibration_curve(x_train,y_train,x_test,y_test,classifier_object,classifier_name,figure_index,plt_show=plt_show)
 def time_function(f,*args):
     '''
@@ -247,8 +247,6 @@ def using_hmms_to_compute_summed_distances(trainData, testData, n_values_to_sum=
     '''
     from hmm.compute_hmm_values import compute_hmm_values as chv
     return chv(trainData,testData,n_values_to_sum=n_values_to_sum)
-def mpi4py_distrubute_function(func,a):
-    pass
 def ADASYN(X,y,ratio=0.5,imb_threshold=.5,k=5,random_state=None,verbose = True):
     """
     Returns synthetic minority samples.
@@ -359,7 +357,23 @@ def cluster_based_over_under_sampling(X,y,n_majority=4,n_minority=2,ratio=0.5):
     '''
     from resampling_data_techniques import cluster_based_oversampling
     return cluster_based_oversampling.cluster_based_oversampling(X,y,n_majority,n_minority,ratio=ratio)
-
+def moving_mean_smoothing(X,m):
+    '''
+    Returns smoothed dataset of X by computing moving mean
+    Parameters
+    ----------
+    X : arraylike dataset
+    m : the size of the sliding window, a larger window will change the original dataset more-smoothing it more, while a smaller window will leave the dataset more exact-but less smoothed
+    Returns
+    ----------
+    X : smoothed dataset of the same length as original X
+    '''
+    from smoothing_techniques import moving_average_smooth
+    try:
+        if np.shape(X)[1] != np.inf:
+            return moving_average_smooth.smooth2D(X,m)
+    except IndexError:
+        return moving_average_smooth.running_mean(X,m)
 if __name__ =="__main__":
     from sklearn import datasets
     from sklearn.svm import SVC

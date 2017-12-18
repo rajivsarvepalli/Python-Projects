@@ -55,4 +55,4 @@ def bar_stack_grapher(values,bar_labels,colors,barwidth=1,legend_values=None,x_l
         plt.show()
 if __name__ =="__main__":
     #testing here
-    pass
+    bar_stack_grapher([10,20,30,40],['Times for Ensemble Testing(all parts) using clasifiers: (GaussianNB, GaussianProcess, RandomForestClassifier) '],['b','g','y','r'],legend_values=['Load Data','Oversampling Method(cluster)','Fitting Ensemble','Predicting with Ensemble'])

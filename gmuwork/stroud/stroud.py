@@ -73,14 +73,15 @@ if __name__ == "__main__":
     from sklearn.model_selection import train_test_split
     from sklearn.naive_bayes import GaussianNB
     from sklearn import svm
-    from gmuwork.shortcuts import confusion_matrix_plotter
+    from gmuwork.shortcuts import confusion_matrix_plotter, memory_usage_psutil
     from gmuwork.shortcuts import ADASYN, borderlineSMOTE, simple_random_oversampling, simple_random_undersampling, cluster_based_over_under_sampling
-    distances = np.load('C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/hmm_data/hmm_values_of_100_per_file.npy')
-    l = np.load('C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/hmm_data/hmm_labels_of_100_per_file.npy')
+    distances = np.load('C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/hmm_data/hmm_values_of_40_per_file.npy')
+    l = np.load('C:/Users/Rajiv Sarvepalli/Projects/Data for GMU/tests/hmm_data/hmm_labels_of_40_per_file.npy')
+    all_data,newlabels = distances,l
     # safe,syntheic,danger = borderlineSMOTE(distances,l,1,4000,4)
     # all_data = np.concatenate((distances,safe,syntheic,danger))
     #all_data,newlabels = ADASYN(distances,l,ratio=0.7,imb_threshold=.7,k=10)
-    all_data,newlabels = ADASYN(distances,l,ratio=.7,imb_threshold=.7,k=10)
+    #all_data,newlabels = cluster_based_over_under_sampling(distances,l,n_majority=6,n_minority=2,ratio=.8)
     # for i in range(0,len(distances)):
     #     print(distances[i])
     #     print(l[i])

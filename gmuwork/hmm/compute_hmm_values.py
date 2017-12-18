@@ -2,9 +2,17 @@ from hmmlearn import hmm
 import numpy as np
 def prepare_hmms(traindata,testData):
     '''
-    make hidden markov models trained for each vector of the dataset
-    returning two arrays one array of the hmms for the trainData, 
-    and the other hmms for the testData
+    Returns trainhmm_matrix, testhmm_matrix, matrixs of one hmm per data vector for each portion of the dataset (trainData, testData)
+    Parameters
+    ----------
+    trainData : arraylike training dataset (normal data)
+    testData : arraylike test dataset (all other data)
+    Returns
+    ----------
+    trainhmm_matrix : arraylike matrix of one hmm per data vector of the training dataset (the normal data)
+    testhmm_matrix : arraylike matrix of one hmm per data vector of the test dataset
+    Note
+    ---------- 
     '''
     testhmm_matrix =[]
     trainhmm_matrix = []
@@ -19,8 +27,18 @@ def prepare_hmms(traindata,testData):
     return np.array(trainhmm_matrix), np.array(testhmm_matrix)
 def compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData):
     '''
-    For each test hidden markov model compare to each train markov model using formula:\n
-        Distance = 1/2 * TRHM.sc(TEV) - TRHM.sc(TRV) + TEHM.sc(TRV) - TEHM.sc(TRV)
+    Returns smoothed dataset of X by computing moving mean
+    Parameters
+    ----------
+    trainhmm_matrix : arraylike matrix of one hmm per data vector of the training dataset (the normal data)
+    testhmm_matrix : arraylike matrix of one hmm per data vector of the test dataset
+    Returns
+    ----------
+    hmm_distances : computed distance values, Matrix of dimensions are: len(testData), len(trainData); (Row*Column)
+    Note
+    ---------- 
+    Description : For each test hidden markov model compare to each train markov model using formula:\n
+    Distance = 1/2 * TRHM.sc(TEV) - TRHM.sc(TRV) + TEHM.sc(TRV) - TEHM.sc(TRV)
     Note: \n
     TRHM = trainhmm\n
     TEHM = testhmm\n
@@ -39,19 +57,27 @@ def compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData):
             temp_result.append(a)
         results.append(temp_result)
     return results
-def compute_hmm_values(trainData,testData,n_values_to_sum=5):
+def compute_hmm_values(trainData,testData,n=5):
     '''
-    input: trainData, testData and the number of values to sum (n-nearest neighbors)
-    output: the n nearest output values summed of each (len(array_of_summed_values) = len(testData))
-    data vector in the dataset(dataset is both trainData and testData)\n
-    given some normality, compute_hmm_values can compare that to testData\n and see its relative distance to the normality
+    Returns biggest n hmm distance values summed per data vector\n
+    Therefore 1 value per each data vector
+    Parameters
+    ----------
+    trainData : the training data (the normal data only non-tampered state)
+    testData : the rest of the data
+    Returns
+    ----------
+    hmm_summed_distances : dataset of the top n computed hmm distances summed, one value per data vector of original dataset
+    Note
+    ----------
+    Description : given some normality, compute_hmm_values can compare that to testData and see its relative distance to the normality
     '''
     trainhmm_matrix, testhmm_matrix = prepare_hmms(trainData,testData)
     result =compare_hmms(trainhmm_matrix,testhmm_matrix,trainData,testData)
     result = np.array(result)
     result2 = []
     for x in result:
-        ind = np.argpartition(x, n_values_to_sum)[:n_values_to_sum]
+        ind = np.argpartition(x, n)[:n]
         temp = np.sum(x[ind])
         result2.append([temp])
     return np.array(result2)
