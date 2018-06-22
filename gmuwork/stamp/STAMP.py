@@ -35,7 +35,7 @@ def MASS(y,n,cum_sumx,cum_sumx2,sumx2,sumx,meanx,sigmax2,sigmax,X,value):
     y = np.append(y,((n)-(m))*[0])#changed from n-m to 
     Y = fft(y)
     Z = X*Y
-    Z = pyfftw.n_byte_align(Z,None)
+    Z = pyfftw.byte_align(Z)
     z = pyfftw.interfaces.scipy_fftpack.ifft(Z)
     dist = value - 2*(z[m:n] - sumy*meanx)/sigmax + sumy2
     return np.abs(np.lib.scimath.sqrt(dist))#complex sqrt required
@@ -48,6 +48,9 @@ def STAMP(time_seriesA,m,time_seriesB):
     output: the matrix profile,followed by the integere pointers\n
     these pointers allow you to find nearest neighbor in O(n) time
     '''
+    time_seriesA = np.array(time_seriesA)
+    if len(np.shape(time_seriesA))!=1:
+        time_seriesA = time_seriesA.flatten()
     if time_seriesB is None:
         time_seriesB = time_seriesA
     nB = len(time_seriesB)
@@ -67,9 +70,8 @@ if __name__ =="__main__":
     #testing
     import time
     import scipy.io as sio
-    from gmuwork.shortcuts import quick_txt_reader
-    matfile = sio.loadmat("C:/Users/Rajiv Sarvepalli/Downloads/testData.mat")
-    data = matfile['data'][0]
+    matfile = sio.loadmat("C:/Users/Rajiv Sarvepalli/Downloads/MP_first_test_penguin_sample.mat")
+    data = matfile['penguin_sample'][0:20000]
     # for x in range(0,142):
     #     data+=[2,2,2,2,2,5,5,5,5,5,6,6,6,6,6,6,8,8,8,8,8,9,9,9,9,9,8,8,8,8,8,6,6,6,6,6,5,5,5,5,5,2,2,2,2,2]
     # data = np.insert(data,2500,[10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10])
